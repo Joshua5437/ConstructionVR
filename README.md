@@ -3,7 +3,7 @@ MSU VR Research Project on Proper Ergonomics in Construction
 
 Faculty Researchers     - Dr. Jun Wang & Dr. Junfeng Ma
 
-Primary Contributors    - Cody Armand & Joshua 
+Primary Contributors    - Cody Armand & Joshua Cotton
 
 Device Compatibility    - HTC Vive Pro 
 
