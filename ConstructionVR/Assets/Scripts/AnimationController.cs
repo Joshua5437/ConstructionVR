@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class AnimationController : MonoBehaviour
 { 
-    public Animator npcAnim;
+    private Animator npcAnim;
     private bool kneelBool;
     private bool isLerping; 
-    public Transform npcTransform; 
+    private Transform npcTransform; 
     public Transform npcStart;
     public Transform npcMove1; 
     public Transform npcMove2;  
@@ -16,9 +16,12 @@ public class AnimationController : MonoBehaviour
     public Transform npcMove5;  
     public Transform npcMove6;  
     public Transform npcMove7;  
-    public Transform npcMove8;  
+    public Transform npcMove8;   
+    public Transform npcMove9;
 
-    public GameObject box; 
+    public GameObject box;  
+    public GameObject task1Start;
+    public GameObject task2Start;
     public Transform hand;
     public float duration;
 
@@ -30,7 +33,8 @@ public class AnimationController : MonoBehaviour
         box = GameObject.Find("npcBox"); 
         hand = GameObject.Find("mixamorig:RightHand").GetComponent<Transform>();
         kneelBool = true; 
-        MovementTest();
+        //MovementTest(); 
+        //task1Movement();
     }
 
     // Update is called once per frame
@@ -40,9 +44,158 @@ public class AnimationController : MonoBehaviour
 
     /*public void StartTask1() { 
         StartCoroutine(Task1Coroutine());
-    } */
+    } */ 
 
-    public void MovementTest() { 
+    public void task1Movement () { 
+        StartCoroutine(task1MovementCoroutine());
+
+    }  
+
+    IEnumerator task1MovementCoroutine() { 
+        task1Start.SetActive(false);
+        StartCoroutine(Lerp(npcTransform, npcStart, npcMove1, duration)); 
+        while (isLerping) { 
+            yield return null;
+        }
+        StartCoroutine(RotationLerp(npcTransform, npcStart, npcMove1, 2)); 
+        while (isLerping) { 
+            yield return null;
+        } 
+  
+        //TransformMove1-TransformMove2 (Grab Box From Table)
+        StartCoroutine(Lerp(npcTransform, npcMove1, npcMove2, duration)); 
+        while (isLerping) { 
+            yield return null;
+        }
+        StartCoroutine(RotationLerp(npcTransform, npcMove1, npcMove2, 2)); 
+        while (isLerping) { 
+            yield return null;
+        } 
+
+        //Return to TransformMove1
+        StartCoroutine(Lerp(npcTransform, npcMove2, npcMove3, duration)); 
+        while (isLerping) { 
+            yield return null;
+        }
+        StartCoroutine(RotationLerp(npcTransform, npcMove2, npcMove3, 2)); 
+        while (isLerping) { 
+            yield return null;
+        } 
+
+        //TransformMove1-TransformMove3 
+        StartCoroutine(Lerp(npcTransform, npcMove3, npcMove4, duration)); 
+        while (isLerping) { 
+            yield return null;
+        }  
+        StartCoroutine(RotationLerp(npcTransform, npcMove3, npcMove4, 2)); 
+        while (isLerping) { 
+            yield return null;
+        } 
+
+        //TransformMove3-TransformMove4 (Set Box Next to Road) 
+        StartCoroutine(Lerp(npcTransform, npcMove4, npcStart, duration)); 
+        while (isLerping) { 
+            yield return null;
+        } 
+        StartCoroutine(RotationLerp(npcTransform, npcMove4, npcStart, 2)); 
+        while (isLerping) { 
+            yield return null;
+        }  
+
+        npcAnim.SetBool("Idle", true);
+        yield return null;
+    }
+
+     public void task2Movement () { 
+        StartCoroutine(task2MovementCoroutine());
+
+    }  
+
+    IEnumerator task2MovementCoroutine() { 
+
+        npcAnim.SetBool("Idle", false); 
+        task2Start.SetActive(false);
+
+        StartCoroutine(Lerp(npcTransform, npcStart, npcMove5, duration)); 
+        while (isLerping) { 
+            yield return null;
+        }
+        StartCoroutine(RotationLerp(npcTransform, npcStart, npcMove5, 2)); 
+        while (isLerping) { 
+            yield return null;
+        } 
+  
+        //TransformMove1-TransformMove2 (Grab Box From Table)
+        StartCoroutine(Lerp(npcTransform, npcMove5, npcMove6, duration)); 
+        while (isLerping) { 
+            yield return null;
+        }
+        StartCoroutine(RotationLerp(npcTransform, npcMove5, npcMove6, 2)); 
+        while (isLerping) { 
+            yield return null;
+        } 
+
+        //Return to TransformMove1
+        StartCoroutine(Lerp(npcTransform, npcMove6, npcMove7, duration)); 
+        while (isLerping) { 
+            yield return null;
+        }
+        StartCoroutine(RotationLerp(npcTransform, npcMove6, npcMove7, 2)); 
+        while (isLerping) { 
+            yield return null;
+        } 
+
+        //TransformMove1-TransformMove3 
+        StartCoroutine(Lerp(npcTransform, npcMove7, npcMove8, duration)); 
+        while (isLerping) { 
+            yield return null;
+        }  
+        StartCoroutine(RotationLerp(npcTransform, npcMove7, npcMove8, 2)); 
+        while (isLerping) { 
+            yield return null;
+        } 
+
+        //TransformMove1-TransformMove3 
+        StartCoroutine(Lerp(npcTransform, npcMove8, npcMove9, duration)); 
+        while (isLerping) { 
+            yield return null;
+        }  
+        StartCoroutine(RotationLerp(npcTransform, npcMove8, npcMove9, 2)); 
+        while (isLerping) { 
+            yield return null;
+        } 
+
+        //TransformMove3-TransformMove4 (Set Box Next to Road) 
+        StartCoroutine(Lerp(npcTransform, npcMove9, npcStart, duration)); 
+        while (isLerping) { 
+            yield return null;
+        } 
+        StartCoroutine(RotationLerp(npcTransform, npcMove9, npcStart, 2)); 
+        while (isLerping) { 
+            yield return null;
+        }  
+
+        npcAnim.SetBool("Idle", true);
+        yield return null;
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   /* public void MovementTest() { 
         StartCoroutine(MoveTestCoroutine());
     } 
 
@@ -136,36 +289,9 @@ public class AnimationController : MonoBehaviour
         while (isLerping) { 
             yield return null;
         }
-    }
+    }*/
 
-/*    IEnumerator Task1Coroutine() {   Will Need Variable Renamings
-        StartCoroutine(Lerp(npcTransform, task1Start, task1End, duration)); 
-        while (isLerping) { 
-            yield return null;
-        }
-        npcAnim.SetTrigger("KneelTrig");
-        yield return new WaitForSeconds(3f); 
-        box.transform.position = hand.position;
-        box.transform.parent = hand; 
-        npcAnim.ResetTrigger("KneelTrig"); 
-        npcAnim.SetTrigger("WalkTrig");
-        yield return new WaitForSeconds(5f);
-        StartCoroutine(Lerp(npcTransform, task1End, task2, duration));  
-        while (isLerping) { 
-            yield return null;
-        } 
-        npcAnim.ResetTrigger("WalkTrig"); 
-        npcAnim.SetTrigger("KneelTrig"); 
-        yield return new WaitForSeconds(3f); 
-        box.transform.position = task2.position;
-        box.transform.parent = null;  
-        npcAnim.ResetTrigger("KneelTrig"); 
-        npcAnim.SetTrigger("WalkTrig");
-        yield return new WaitForSeconds(5f);
-        StartCoroutine(Lerp(npcTransform, task2, task2End, duration));
-        npcAnim.ResetTrigger("WalkTrig");
-        npcAnim.SetTrigger("EndTrig");
-    } */
+
 
 
 

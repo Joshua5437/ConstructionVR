@@ -1,4 +1,0 @@
-repository "New Unity Project (1)@SupremeDuck1ing@cloud"
-  path "/"
-    br "/main"
-    co "/main"
